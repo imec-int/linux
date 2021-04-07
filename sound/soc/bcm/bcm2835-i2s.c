@@ -364,7 +364,7 @@ static int bcm2835_i2s_hw_params(struct snd_pcm_substream *substream,
 		rx_mask = dev->rx_mask;
 		tx_mask = dev->tx_mask;
 		// bclk_rate = dev->frame_length * params_rate(params);
-		bclk_rate = 1536000;
+		bclk_rate = 3145728//1536000;
 	} else {
 		slots = 2;
 		slot_width = params_width(params);
@@ -376,7 +376,7 @@ static int bcm2835_i2s_hw_params(struct snd_pcm_substream *substream,
 			return frame_length;
 
 		// bclk_rate = snd_soc_params_to_bclk(params);
-		bclk_rate = 1536000;
+		bclk_rate = 3145728;
 
 		if (bclk_rate < 0)
 			return bclk_rate;
@@ -578,7 +578,7 @@ static int bcm2835_i2s_hw_params(struct snd_pcm_substream *substream,
 		return -EINVAL;
 	}
 
-	/*adaptions for PDM operation*/
+	/*adaptions for PDM operation*/	
 	mode |= BCM2835_I2S_PDMN; // 32 bits
 	mode |= BCM2835_I2S_PDME;
 
@@ -791,8 +791,8 @@ static struct snd_soc_dai_driver bcm2835_i2s_dai = {
 				| SNDRV_PCM_FMTBIT_S32_LE
 		},
 	.ops = &bcm2835_i2s_dai_ops,
-	.symmetric_rate = 1,
-	.symmetric_sample_bits = 1,
+	.symmetric_rates = 1,
+	.symmetric_samplebits = 1,
 };
 
 static bool bcm2835_i2s_volatile_reg(struct device *dev, unsigned int reg)
