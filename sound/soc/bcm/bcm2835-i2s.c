@@ -363,8 +363,8 @@ static int bcm2835_i2s_hw_params(struct snd_pcm_substream *substream,
 		frame_length = dev->frame_length;
 		rx_mask = dev->rx_mask;
 		tx_mask = dev->tx_mask;
-		// bclk_rate = dev->frame_length * params_rate(params);
-		bclk_rate = 3145728;//1536000;
+		bclk_rate = dev->frame_length * params_rate(params);
+		//bclk_rate = 3145728;//1536000;
 	} else {
 		slots = 2;
 		slot_width = params_width(params);
